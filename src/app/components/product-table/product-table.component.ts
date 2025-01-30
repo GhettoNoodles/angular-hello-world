@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableModule } from '@angular/material/table';
+import { MatTableDataSource } from '@angular/material/table';
 import { Product } from 'src/app/interfaces/product';
 import { ProductAPIService } from 'src/app/services/product-api.service';
 @Component({
@@ -11,6 +11,7 @@ export class ProductTableComponent implements OnInit {
   productArray: Product[] = [
    
   ];
+  datasource;
 
   columnsToDisplay: string[] = [
     'title',
@@ -26,11 +27,11 @@ export class ProductTableComponent implements OnInit {
   ngOnInit(): void {
     this.getproducts();
   }
-
   getproducts() {
     this.productAPI.GetProducts().subscribe({
       next: (response: any) => {
         this.productArray = response.products;
+        this.datasource = new MatTableDataSource(this.productArray);
       },
       error: (error: Error) => {
         console.log(error);

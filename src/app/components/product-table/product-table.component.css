@@ -1,5 +1,7 @@
+
+
 .products-table {
-  width: 100%;
+  width: 80%;
 }
 
 .mat-column-title {
@@ -44,4 +46,5 @@
     width: 25px;
     padding-left: 16px;
     font-size: 20px;
+    border-right: 1px dashed currentColor;
   }
