@@ -1,0 +1,47 @@
+.products-table {
+  width: 100%;
+}
+
+.mat-column-title {
+  width: 32px;
+  border-right: 2px solid currentColor;
+  padding-right: 24px;
+  font-size: 20px;
+}
+
+.mat-column-description {
+  width: 30%;
+  border-right: 1px dashed currentColor;
+  padding-left: 16px;
+  font-size: 20px;
+}
+
+.mat-column-price {
+  width: 25px;
+  border-right: 1px dashed currentColor;
+  padding-left: 16px;
+  font-size: 20px;
+}
+.mat-column-discountPerc {
+    width: 25px;
+    border-right: 1px dashed currentColor;
+    padding-left: 16px;
+    font-size: 20px;
+  }
+  .mat-column-rating {
+    width: 25px;
+    border-right: 1px dashed currentColor;
+    padding-left: 16px;
+    font-size: 20px;
+  }
+  .mat-column-brand {
+    width: 25px;
+    border-right: 1px dashed currentColor;
+    padding-left: 16px;
+    font-size: 20px;
+  }
+  .mat-column-thumbnail {
+    width: 25px;
+    padding-left: 16px;
+    font-size: 20px;
+  }
