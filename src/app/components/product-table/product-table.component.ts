@@ -1,18 +1,9 @@
-import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { SelectionModel } from '@angular/cdk/collections';
-import {
-  AfterViewInit,
-  Component,
-  inject,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Product } from 'src/app/interfaces/product';
 import { ProductAPIService } from 'src/app/services/product-api.service';
-import { MatFormField } from '@angular/material/form-field';
 @Component({
   selector: 'app-product-table',
   templateUrl: './product-table.component.html',
@@ -63,8 +54,7 @@ export class ProductTableComponent implements AfterViewInit, OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  ApplyFilter(filterValue:string)
-  {
+  ApplyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this.dataSource.filter = filterValue;

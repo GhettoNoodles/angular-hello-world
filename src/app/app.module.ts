@@ -7,8 +7,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductTableComponent } from './components/product-table/product-table.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { HttpClientModule } from '@angular/common/http';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSortModule } from '@angular/material/sort';
+import { HttpClientModule } from '@angular/common/http';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [AppComponent, ProductTableComponent],
@@ -19,7 +21,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatTableModule,
     MatPaginatorModule,
     HttpClientModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatSortModule,
+    MatInputModule,
   ],
   providers: [AppComponent, ProductTableComponent],
   bootstrap: [AppComponent],
