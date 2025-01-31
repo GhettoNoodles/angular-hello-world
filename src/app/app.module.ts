@@ -1,4 +1,4 @@
-import { NgModule ,ViewChild} from '@angular/core';
+import { NgModule ,ViewChild,AfterViewInit} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,7 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     MatTableModule,
     MatPaginatorModule,
-    HttpClientModule
+    HttpClientModule,
+    
   ],
   providers: [AppComponent, ProductTableComponent],
   bootstrap: [AppComponent],

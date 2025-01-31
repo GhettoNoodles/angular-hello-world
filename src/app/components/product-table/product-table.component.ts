@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Product } from 'src/app/interfaces/product';
 import { ProductAPIService } from 'src/app/services/product-api.service';
@@ -7,11 +8,13 @@ import { ProductAPIService } from 'src/app/services/product-api.service';
   templateUrl: './product-table.component.html',
   styleUrls: ['./product-table.component.css'],
 })
-export class ProductTableComponent implements OnInit {
+export class ProductTableComponent implements AfterViewInit {
   productArray: Product[] = [
-   
+  
   ];
-  datasource;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  datasource = new MatTableDataSource();
 
   columnsToDisplay: string[] = [
     'title',
@@ -24,14 +27,19 @@ export class ProductTableComponent implements OnInit {
   ];
   constructor(private productAPI: ProductAPIService) {}
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.getproducts();
+  
+
   }
   getproducts() {
     this.productAPI.GetProducts().subscribe({
       next: (response: any) => {
         this.productArray = response.products;
+        console.log(1);
         this.datasource = new MatTableDataSource(this.productArray);
+        console.log(2)
+        this.datasource.paginator = this.paginator
       },
       error: (error: Error) => {
         console.log(error);
