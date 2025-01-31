@@ -1,20 +1,30 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { SelectionModel } from '@angular/cdk/collections';
+import {
+  AfterViewInit,
+  Component,
+  inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Product } from 'src/app/interfaces/product';
 import { ProductAPIService } from 'src/app/services/product-api.service';
+import { MatFormField } from '@angular/material/form-field';
 @Component({
   selector: 'app-product-table',
   templateUrl: './product-table.component.html',
   styleUrls: ['./product-table.component.css'],
 })
-export class ProductTableComponent implements AfterViewInit {
-  productArray: Product[] = [
-  
-  ];
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+export class ProductTableComponent implements AfterViewInit, OnInit {
+  // private _liveAnnouncer = inject(LiveAnnouncer);
+  productArray: Product[] = [];
 
-  datasource = new MatTableDataSource();
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  dataSource = new MatTableDataSource();
 
   columnsToDisplay: string[] = [
     'title',
@@ -23,27 +33,49 @@ export class ProductTableComponent implements AfterViewInit {
     'discountPerc',
     'rating',
     'brand',
-    'thumbnail'
+    'thumbnail',
   ];
+
   constructor(private productAPI: ProductAPIService) {}
+  ngOnInit(): void {
+    this.GetProducts();
+  }
 
   ngAfterViewInit(): void {
-    this.getproducts();
-  
-
+    this.UpdateTable;
   }
-  getproducts() {
+
+  GetProducts() {
     this.productAPI.GetProducts().subscribe({
       next: (response: any) => {
         this.productArray = response.products;
-        console.log(1);
-        this.datasource = new MatTableDataSource(this.productArray);
-        console.log(2)
-        this.datasource.paginator = this.paginator
+        this.dataSource = new MatTableDataSource(this.productArray);
+        this.UpdateTable();
       },
       error: (error: Error) => {
         console.log(error);
       },
     });
   }
+
+  UpdateTable() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  ApplyFilter(filterValue:string)
+  {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
+  /* announceSortChange(sortState: Sort) {
+    if (sortState.direction) {
+      console.log(`Sorted ${sortState.direction}ending`);
+      // this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      console.log('Sorting cleared');
+      // this._liveAnnouncer.announce('Sorting cleared');
+    }
+  } */
 }
